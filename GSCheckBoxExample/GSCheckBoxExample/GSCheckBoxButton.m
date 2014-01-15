@@ -23,6 +23,29 @@ static const CGFloat kButtonSpacing = 5.0;
 
 @implementation GSCheckBoxButton
 
+
+- (instancetype)initWithFrame:(CGRect)frame
+                onTextPressed:(TextPressedBlock)onTextPressedBlock
+            onCheckBoxPressed:(CheckBoxPressedBlock)onCheckBoxPressedBlock
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        _onCheckBoxPressed = onCheckBoxPressedBlock;
+        _onTextPressed = onTextPressedBlock;
+        [self awakeFromNib];
+    }
+    return self;
+}
+
++ (instancetype)buttonWithFrame:(CGRect)buttonFrame
+                  onTextPressed:(TextPressedBlock)onTextPressedBlock
+              onCheckBoxPressed:(CheckBoxPressedBlock)onCheckBoxPressedBlock
+{
+    return [[self alloc]initWithFrame:buttonFrame
+                        onTextPressed:onTextPressedBlock
+                    onCheckBoxPressed:onCheckBoxPressedBlock];
+}
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];

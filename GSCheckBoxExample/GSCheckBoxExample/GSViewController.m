@@ -12,23 +12,37 @@
 @interface GSViewController ()
 
 @property (weak, nonatomic) IBOutlet GSCheckBoxButton *checkBox;
-
-@property (weak, nonatomic) GSCheckBoxButton *programaticallyCreatedCheckBox;
+@property (strong, nonatomic) GSCheckBoxButton *programaticallyCreatedCheckBox;
 
 @end
+
+static inline void logText(NSString *text) {
+    NSLog(@"%@", text);
+}
 
 @implementation GSViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    [self.checkBox onTextPressed:^{
+        logText(@"Storyboard created button text pressed!");
+    } onCheckBoxPressed:^(BOOL isChecked) {
+        logText(@"Storyboard created button text check box pressed!");
+    }];
+    
+    self.programaticallyCreatedCheckBox =
+        [GSCheckBoxButton buttonWithFrame:CGRectMake(24, 90, 273, 27) onTextPressed:^{
+            logText(@"Programatically created button text pressed!");
+        } onCheckBoxPressed:^(BOOL isChecked) {
+            logText(@"Programatically created button check box pressed!");
+        }];
+    [self.view addSubview:self.programaticallyCreatedCheckBox];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
