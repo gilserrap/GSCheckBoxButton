@@ -25,6 +25,14 @@ static inline void logText(NSString *text) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSAttributedString *titleText =
+    [[NSAttributedString alloc]initWithString:@"Accept terms and conditions"
+                                   attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
+                                                NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)}];
+    [self.checkBox setAttributedTitle:titleText
+                             forState:UIControlStateNormal];
+
+    
     [self.checkBox onTextPressed:^{
         logText(@"Storyboard created button text pressed!");
     } onCheckBoxPressed:^(BOOL isChecked) {
